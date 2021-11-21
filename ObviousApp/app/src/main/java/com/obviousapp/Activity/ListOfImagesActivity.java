@@ -2,7 +2,10 @@ package com.obviousapp.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.obviousapp.Adapter.GridAdapter;
@@ -37,6 +40,15 @@ public class ListOfImagesActivity extends AppCompatActivity {
         GridAdapter adapter = new GridAdapter(getApplicationContext(),imageModelArrayList);
         imageListGridView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+        imageListGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(),ImageDetailActivity.class);
+                intent.putExtra("title",imageModelArrayList.get(position).getTitle());
+                startActivity(intent);
+            }
+        });
     }
 
     /*
